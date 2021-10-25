@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 
-@Entity(name = "users_ins")
+@Entity(name = "user_ins")
 public class UserInstagram implements Serializable{
 	/**
 	 * 
@@ -24,10 +24,10 @@ public class UserInstagram implements Serializable{
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "user")
+	@Column(name = "userIns")
 	private String user;
 	
-	@Column(name = "username")
+	@Column(name = "userName")
 	private String username;
 	
 	
