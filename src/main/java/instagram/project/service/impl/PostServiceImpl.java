@@ -20,6 +20,7 @@ import instagram.project.response.PagedResponse;
 import instagram.project.response.PostInstagramResponse;
 import instagram.project.response.UserResponse;
 import instagram.project.service.PostService;
+import instagram.project.utils.AppConstants;
 
 @Service
 @Transactional
@@ -51,10 +52,11 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public PagedResponse<PostInstagramResponse> searchByCaption(String key, int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
-		Page<PostInstagram> posts = postInstagramRepository.searchByCaption(key, pageable);
-		
+	public PagedResponse<PostInstagramResponse> findByCaptionContainingIgnoreCase(String key) {
+		String page = AppConstants.DEFAULT_PAGE_NUMBER;
+		String size = AppConstants.DEFAULT_PAGE_SIZE;
+		Pageable pageable = PageRequest.of(Integer. valueOf(page), Integer. valueOf(size));
+		Page<PostInstagram> posts = postInstagramRepository.findByCaptionContainingIgnoreCase(key, pageable);
 		List<PostInstagramResponse> postResponses = new ArrayList<>(posts.getContent().size());
 		for (PostInstagram post : posts.getContent()) {
 			ObjectMapper Obj = new ObjectMapper();

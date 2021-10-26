@@ -25,12 +25,10 @@ public class PostController {
 		return postService.getAllPosts(page, size);
 	}
 	
-	@GetMapping
+	@GetMapping(path = "/search")
 	public PagedResponse<PostInstagramResponse> search(
-			@RequestParam(name = "key", required = true ) String key,
-			@RequestParam(name = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
-			@RequestParam(name = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
-		return postService.searchByCaption(key, page, size);
+			@RequestParam(name = "key") String key) {
+		return postService.findByCaptionContainingIgnoreCase(key);
 	}
 	
 }

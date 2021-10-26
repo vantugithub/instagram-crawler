@@ -20,8 +20,8 @@ public interface PostInstagramRepository extends JpaRepository<PostInstagram, In
 			+ "AGAINST (?1)" ,nativeQuery = true)
 	public Page<PostInstagram> search(String keyword,Pageable pageable);
 	
-	@Query(value = "select * from posts_ins where caption like '%?1%'",nativeQuery = true)
-	public Page<PostInstagram> searchByCaption(String keyword,Pageable pageable);
+	
+	public Page<PostInstagram> findByCaptionContainingIgnoreCase(String keyword,Pageable pageable);
 	
 
 }
