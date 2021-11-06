@@ -19,7 +19,7 @@ public class PostController {
 	
 	
 	@GetMapping
-	public PagedResponse<PostInstagramResponse> getAllPhotos(
+	public PagedResponse<PostInstagramResponse> getAllPosts(
 			@RequestParam(name = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
 		return postService.getAllPosts(page, size);
