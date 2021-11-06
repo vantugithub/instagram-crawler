@@ -52,9 +52,7 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public PagedResponse<PostInstagramResponse> findByCaptionContainingIgnoreCase(String key) {
-		String page = AppConstants.DEFAULT_PAGE_NUMBER;
-		String size = AppConstants.DEFAULT_PAGE_SIZE;
+	public PagedResponse<PostInstagramResponse> findByCaptionContainingIgnoreCase(String key, int page, int size) {
 		Pageable pageable = PageRequest.of(Integer. valueOf(page), Integer. valueOf(size));
 		Page<PostInstagram> posts = postInstagramRepository.findByCaptionContainingIgnoreCase(key, pageable);
 		List<PostInstagramResponse> postResponses = new ArrayList<>(posts.getContent().size());
