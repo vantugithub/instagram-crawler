@@ -14,7 +14,7 @@ import instagram.project.utils.AppConstants;
 
 @RestController
 @RequestMapping("/api/posts")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 	@Autowired
 	private PostService postService;
