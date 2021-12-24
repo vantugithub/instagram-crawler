@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import instagram.project.entity.User;
 
 public class JwtUserDetails implements UserDetails {
 
@@ -40,15 +39,15 @@ public class JwtUserDetails implements UserDetails {
 	        this.authorities = authorities;
 	    }
 
-	    public static JwtUserDetails build(User user) {
+	    public static JwtUserDetails build(instagram.project.entity.User user) {
 	        List authorities = user.getRoles().stream().map(role ->
 	                new SimpleGrantedAuthority(role.getName().name())
 	        ).collect(Collectors.toList());
 
 	        return new JwtUserDetails(
 	                user.getId(),
-	                user.getFirstName(),
-	                user.getUserName(),
+	                user.getFullName(),
+	                user.getUsername(),
 	                user.getEmail(),
 	                user.getPassword(),
 	                authorities

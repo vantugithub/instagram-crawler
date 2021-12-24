@@ -19,6 +19,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import instagram.project.entity.RoleName;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -60,8 +62,10 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/api/posts/**").permitAll()
-            .antMatchers("/api/auth/**").permitAll()
+            .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/api/storage/**").permitAll()
+            .antMatchers("/api/admin/**").hasRole("ADMIN")
+            .antMatchers("/api/posts/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated();
 
        httpSecurity
@@ -85,7 +89,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(AUTH_WHITELIST);
     }
     
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {

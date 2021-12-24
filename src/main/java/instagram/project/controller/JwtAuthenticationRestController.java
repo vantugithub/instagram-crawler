@@ -72,6 +72,7 @@ public class JwtAuthenticationRestController {
 	  Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), 
 						authenticationRequest.getPassword()));
+	  
     SecurityContextHolder.getContext().setAuthentication(authentication);
     final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(authenticationRequest
     		.getUsername());
@@ -81,7 +82,8 @@ public class JwtAuthenticationRestController {
     return ResponseEntity.ok(new JwtTokenResponse(token,userDetails.getUsername()));
   }
 
-  @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)
+  @SuppressWarnings("unused")
+@RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
@@ -102,7 +104,7 @@ public class JwtAuthenticationRestController {
   }
   
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 @PreAuthorize("hasRole('ADMIN')")
 @RequestMapping(value = "/api/auth/signupforemployee", method = RequestMethod.POST)
   public ResponseEntity registerUserForEmployee(@Validated @RequestBody SignUpFormRequest signUpRequest) {
@@ -117,11 +119,10 @@ public class JwtAuthenticationRestController {
       }
 
       // Creating user's account
-      User user = new User(signUpRequest.getFirstName(),signUpRequest.getLastName(),
+      User user = new User(signUpRequest.getFullName(),
     		  signUpRequest.getUserName(),
               passwordEncoder.encode(signUpRequest.getPassword()), 
-              signUpRequest.getEmail(), 
-              signUpRequest.getAddress(),"");
+              signUpRequest.getEmail(),1,null);
 
       Set<String> strRoles = signUpRequest.getRole();
       Set<Role> roles = new HashSet<>();
@@ -153,7 +154,7 @@ public class JwtAuthenticationRestController {
       return ResponseEntity.ok().body("User registered successfully!");
   }
   
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 @RequestMapping(value = "/api/auth/signup", method = RequestMethod.POST)
 public ResponseEntity registerUser(@Validated @RequestBody SignUpUserFormRequest signUpRequest) {
     if(userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -167,43 +168,20 @@ public ResponseEntity registerUser(@Validated @RequestBody SignUpUserFormRequest
     }
 
     // Creating user's account
-    User user = new User(signUpRequest.getFirstName(),signUpRequest.getLastName(),
+    User user = new User(signUpRequest.getFullName(),
   		  signUpRequest.getUsername(),
             passwordEncoder.encode(signUpRequest.getPassword()), 
-            signUpRequest.getEmail(), 
-            signUpRequest.getAddress(),"");
+            signUpRequest.getEmail(),1,null);
 
     Set<Role> roles = new HashSet<>();
     Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
     roles.add(userRole);       
-//    strRoles.forEach(role -> {
-//    	switch(role) {
-//	    		case "admin":
-//	    			Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-//	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//	    			roles.add(adminRole);
-//	    			
-//	    			break;
-//	    		case "pm":
-//	            	Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-//	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//	            	roles.add(pmRole);
-//	            	
-//	    			break;
-//	    		default:
-//	        		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-//	                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//	        		roles.add(userRole);        			
-//    	}
-//    });
     
     user.setRoles(roles);
     userRepository.save(user);
     return ResponseEntity.ok().body("User registered successfully!");
 }
-
-  
   
   
 

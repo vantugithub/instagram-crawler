@@ -6,11 +6,7 @@ import javax.validation.constraints.Size;
 public class SignUpUserFormRequest {
 	@NotBlank
 	@Size(min=2, max = 50)
-	private String firstName;
-	
-	@NotBlank
-	@Size(min=3, max = 50)
-	private String lastName;
+	private String fullName;
 	
 	@NotBlank
     @Size(min=3, max = 50)
@@ -24,40 +20,21 @@ public class SignUpUserFormRequest {
     @Size(min=10, max = 50)
 	private String email;
 	
-	@NotBlank
-    @Size(min=3, max = 100)
-	private String address;
+	
 
-	public SignUpUserFormRequest(@NotBlank @Size(min = 2, max = 50) String firstName,
-			@NotBlank @Size(min = 3, max = 50) String lastName, @NotBlank @Size(min = 3, max = 50) String username,
-			@NotBlank @Size(min = 3, max = 50) String password, @NotBlank @Size(min = 10, max = 50) String email,
-			@NotBlank @Size(min = 3, max = 100) String address) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.address = address;
+	public String getFullName() {
+		return fullName;
 	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
 
 	public SignUpUserFormRequest() {
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getUsername() {
 		return username;
@@ -83,13 +60,6 @@ public class SignUpUserFormRequest {
 		this.email = email;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	
 	
 	

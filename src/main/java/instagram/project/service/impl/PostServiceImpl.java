@@ -18,9 +18,8 @@ import instagram.project.entity.PostInstagram;
 import instagram.project.repository.PostInstagramRepository;
 import instagram.project.response.PagedResponse;
 import instagram.project.response.PostInstagramResponse;
-import instagram.project.response.UserResponse;
+import instagram.project.response.UserInsResponse;
 import instagram.project.service.PostService;
-import instagram.project.utils.AppConstants;
 
 @Service
 @Transactional
@@ -37,7 +36,7 @@ public class PostServiceImpl implements PostService{
 		List<PostInstagramResponse> postResponses = new ArrayList<>(posts.getContent().size());
 		for (PostInstagram post : posts.getContent()) {
 			ObjectMapper Obj = new ObjectMapper();
-			UserResponse userResponse = new UserResponse(post.getUserInstagrams().getUser(),post.getUserInstagrams().getUsername());
+			UserInsResponse userResponse = new UserInsResponse(post.getUserInstagrams().getUser(),post.getUserInstagrams().getUsername());
 			String jsonStr = post.getUserInstagrams().getUser();
 			try {
 				jsonStr = Obj.writeValueAsString(userResponse);
@@ -58,7 +57,7 @@ public class PostServiceImpl implements PostService{
 		List<PostInstagramResponse> postResponses = new ArrayList<>(posts.getContent().size());
 		for (PostInstagram post : posts.getContent()) {
 			ObjectMapper Obj = new ObjectMapper();
-			UserResponse userResponse = new UserResponse(post.getUserInstagrams().getUser(),post.getUserInstagrams().getUsername());
+			UserInsResponse userResponse = new UserInsResponse(post.getUserInstagrams().getUser(),post.getUserInstagrams().getUsername());
 			String jsonStr = post.getUserInstagrams().getUser();
 			try {
 				jsonStr = Obj.writeValueAsString(userResponse);

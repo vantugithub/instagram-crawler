@@ -45,6 +45,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             System.out.println(jwtToken);
+            if (jwtTokenUtil.validateJwtToken(jwtToken)) {
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                 UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(username);
@@ -58,6 +59,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
                 logger.error("JWT_TOKEN_UNABLE_TO_GET_USERNAME", e);
             } catch (ExpiredJwtException e) {
                 logger.warn("JWT_TOKEN_EXPIRED", e);
+            }
             }
         } else {
             logger.warn("JWT_TOKEN_DOES_NOT_START_WITH_BEARER_STRING");

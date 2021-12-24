@@ -1,37 +1,48 @@
 package instagram.project.response;
 
 public class UserResponse {
-	private String user;
+	private String fullName;
+	private String userName;
+	private String email;
+	private int active;
+	private String lastDateUpdated;
 	
-	private String username;
-
-	public String getUser() {
-		return user;
+	public String getFullName() {
+		return fullName;
 	}
-
-	public void setUser(String user) {
-		this.user = user;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-	public UserResponse(String user, String username) {
-		this.user = user;
-		this.username = username;
+	public String getEmail() {
+		return email;
 	}
-
-	public UserResponse() {
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	@Override
-	public String toString() {
-		return "UserResponse [user=" + user + ", username=" + username + "]";
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
+	}
+	public String getLastDateUpdated() {
+		return lastDateUpdated;
+	}
+	public void setLastDateUpdated(String lastDateUpdated) {
+		this.lastDateUpdated = lastDateUpdated;
+	}
+	public UserResponse(String fullName, String userName, String email, int active, String lastDateUpdated) {
+		this.fullName = fullName;
+		this.userName = userName;
+		this.email = email;
+		this.active = active;
+		this.lastDateUpdated = lastDateUpdated;
 	}
 	
 	

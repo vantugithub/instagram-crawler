@@ -31,9 +31,7 @@ public class User extends DateAudit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String lastName;
-	
-	private String firstName;
+	private String fullName;
 	
 	private String username;
 	
@@ -41,29 +39,23 @@ public class User extends DateAudit {
 	
 	private String email;
 	
-	private String address;
+	private int active;
 	
-	private String image;
+
+	public int isActive() {
+		return active;
+	}
+
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
 
 	public String getUserName() {
 		return username;
@@ -89,13 +81,6 @@ public class User extends DateAudit {
 		this.email = email;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	
 	@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", 
@@ -113,27 +98,55 @@ public class User extends DateAudit {
 		this.roles = roles;
 	}
 
-	public User(String lastName, String firstName, String username, String password, String email, String address,
-			String image) {
-		super();
-		this.lastName = lastName;
-		this.firstName = firstName;
+
+	public String getFullName() {
+		return fullName;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public User(Long id, String fullName, String username, String password, String email, int active,
+			Set<Role> roles) {
+		this.id = id;
+		this.fullName = fullName;
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.address = address;
-		this.image = image;
+		this.active = active;
+		this.roles = roles;
 	}
 
-	public String getImage() {
-		return image;
+	public User(String fullName, String username, String password, String email, int active,
+			Set<Role> roles) {
+		this.fullName = fullName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.active = active;
+		this.roles = roles;
 	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	
+
 	
 	
 }

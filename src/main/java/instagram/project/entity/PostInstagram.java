@@ -35,6 +35,9 @@ public class PostInstagram implements Serializable {
 	
 	@ManyToOne
 	private UserInstagram userInstagrams;
+	
+	@ManyToOne
+	private Topic topics;
 
 	public int getId() {
 		return id;
