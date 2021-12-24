@@ -105,7 +105,7 @@ public class AdminController {
 		return ResponseEntity.ok().body("Updated successfully!");
 	}
 	
-	@GetMapping("/users")
+	@GetMapping(path="/users", produces ={"application/json"})
 	public PagedResponse<UserResponse> getAllUsers(
 			@RequestParam(name = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
