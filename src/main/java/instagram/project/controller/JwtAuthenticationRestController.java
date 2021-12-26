@@ -77,7 +77,7 @@ public class JwtAuthenticationRestController {
 
     final String token = jwtTokenUtil.generateToken(userDetails);
 
-    return ResponseEntity.ok(new JwtTokenResponse(token,userDetails.getUsername()));
+    return ResponseEntity.ok(new JwtTokenResponse(token,userDetails.getUsername(),userDetails.getAuthorities().toString()));
   }
 
   @SuppressWarnings("unused")
@@ -90,7 +90,7 @@ public class JwtAuthenticationRestController {
 
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);
-      return ResponseEntity.ok(new JwtTokenResponse(refreshedToken, refreshedToken));
+      return ResponseEntity.ok(new JwtTokenResponse(refreshedToken, refreshedToken,user.getAuthorities().toString()));
     } 
     
     else 
