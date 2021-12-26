@@ -95,7 +95,7 @@ public class AdminController {
 	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@PutMapping("/users/{id}")
+	@GetMapping("/users/{id}")
 	public ResponseEntity updateUser(@PathVariable("id") long id) {
 		if(!userService.existsById(id)) {
 			return new ResponseEntity("Fail -> id user doesn't exist!",
