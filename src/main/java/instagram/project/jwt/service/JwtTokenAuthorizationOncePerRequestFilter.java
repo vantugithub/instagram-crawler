@@ -39,7 +39,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         logger.debug("Authentication Request For '{}'", request.getRequestURL());
         
         final String requestTokenHeader = request.getHeader(this.tokenHeader);
-        
+        logger.warn("JWT_TOKEN_DOES_NOT_START_WITH_BEARER_STRING : "+requestTokenHeader);
         String username = null;
         String jwtToken = null;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {

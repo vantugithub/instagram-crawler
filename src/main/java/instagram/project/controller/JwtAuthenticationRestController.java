@@ -80,7 +80,6 @@ public class JwtAuthenticationRestController {
     return ResponseEntity.ok(new JwtTokenResponse(token,userDetails.getUsername(),userDetails.getAuthorities().toString()));
   }
 
-  @SuppressWarnings("unused")
 @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
     String authToken = request.getHeader(tokenHeader);
