@@ -40,7 +40,6 @@ import instagram.project.response.JwtTokenResponse;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class JwtAuthenticationRestController {
 
   @Value("${jwt.http.request.header}")
