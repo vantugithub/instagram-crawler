@@ -52,10 +52,8 @@ public class AdminController {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/topics/{id}", 
-			  produces = "application/json", 
-			  method=RequestMethod.PUT)
-	public ResponseEntity updateTopic(@RequestParam(name = "id", required = true) int id) {
+	@PutMapping("/topics/{id}")
+	public ResponseEntity updateTopic(@PathVariable(name = "id", required = true) int id) {
 		
 		if(!topicService.existsById(id)) {
 			return new ResponseEntity("Fail -> name of topic doesn't exist!",
