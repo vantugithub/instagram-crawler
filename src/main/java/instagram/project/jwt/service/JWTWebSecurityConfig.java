@@ -58,15 +58,14 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-    	httpSecurity.cors();
-        httpSecurity
+    	httpSecurity.cors().and()
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/storage/**").permitAll()
-            .antMatchers(HttpMethod.PUT,"/api/admin-management/**").hasRole("ADMIN")
-            .antMatchers(HttpMethod.PUT,"/api/posts/**").hasAnyRole("ADMIN","USER")
+            .antMatchers("/api/admin-management/**").hasRole("ADMIN")
+            .antMatchers("/api/posts/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated();
 
        httpSecurity
@@ -89,20 +88,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(AUTH_WHITELIST);
     }
-    
-	@SuppressWarnings("deprecation")
-	@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry
-                .addMapping("/**")
-                .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-                .allowedOrigins("*");
-            }
-        };
-    }
+   
 
 
 }
