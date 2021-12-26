@@ -15,8 +15,8 @@
 	<description>project for Spring Boot</description>
 	<properties>
 	<!-- FOR HEROKU  -->
-	   <java.version>1.8</java.version>   
-		 <!--   <java.version>15</java.version>    -->
+ 	   <java.version>1.8</java.version>   
+		  <!-- <java.version>15</java.version>   --> 
 	</properties>
 	<dependencies>
 		<dependency>
@@ -89,8 +89,8 @@
 	    <version>20180813</version>
 		</dependency>
 							
-		
-<!--  		   <dependency>
+<!-- 		
+  		   <dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 		<scope>runtime</scope>
@@ -103,7 +103,7 @@
             </dependency>
 		
  		
-		    <dependency>
+ 		    <dependency>
 	    <groupId>org.postgresql</groupId>
 	    <artifactId>postgresql</artifactId>
 	    </dependency>   

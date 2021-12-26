@@ -13,4 +13,5 @@ public interface TopicService {
 	public void save(Topic topic);
 	public Boolean existById(int id);
 	public void delete(Topic topic);
+	public Boolean existsById(int id);
 }
