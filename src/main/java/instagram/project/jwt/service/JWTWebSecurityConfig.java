@@ -64,7 +64,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/storage/**").permitAll()
-            .antMatchers("/api/admin/**").hasRole("ADMIN")
+            .antMatchers("/api/admin-management/**").hasRole("ADMIN")
             .antMatchers("/api/posts/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated();
 
