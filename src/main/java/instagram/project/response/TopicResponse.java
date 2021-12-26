@@ -3,12 +3,8 @@ package instagram.project.response;
 public class TopicResponse {
 	private int id;
 	private String nameTopic;
-	public TopicResponse() {
-	}
-	public TopicResponse(int id, String nameTopic) {
-		this.id = id;
-		this.nameTopic = nameTopic;
-	}
+	private int active;
+	
 	public int getId() {
 		return id;
 	}
@@ -21,5 +17,17 @@ public class TopicResponse {
 	public void setNameTopic(String nameTopic) {
 		this.nameTopic = nameTopic;
 	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
+	}
+	public TopicResponse(int id, String nameTopic, int active) {
+		this.id = id;
+		this.nameTopic = nameTopic;
+		this.active = active;
+	}
+	
 	
 }

@@ -25,7 +25,7 @@ public class TopicServiceImpl implements TopicService{
 		List<Topic> lis = topicRepository.findAll();
 		List<TopicResponse> res = new ArrayList<TopicResponse>();
 		for(Topic tp : lis) {
-			res.add(new TopicResponse(tp.getId(),tp.getNameTopic()));
+			res.add(new TopicResponse(tp.getId(),tp.getNameTopic(),tp.getActive()));
 		}
 		
 		return res;

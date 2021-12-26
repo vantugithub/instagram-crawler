@@ -35,8 +35,8 @@ public class AdminController {
 	private UserService userService;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@PostMapping("/topics/{nameTopic}")
-	public ResponseEntity createTopic(@PathVariable("nameTopic") String nameTopic) {
+	@PostMapping("/topics")
+	public ResponseEntity createTopic(@RequestParam(name = "nameTopic", required = true) String nameTopic) {
 		String name = nameTopic.replaceAll(" ", "").toLowerCase();
 		if(topicService.existsByNameTopic(name)) {
 			return new ResponseEntity("Fail -> Name of topic is already in use!",
@@ -49,7 +49,7 @@ public class AdminController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@PutMapping("/topics/{id}")
+	@PutMapping("/topics/{nameTopic}")
 	public ResponseEntity updateTopic(@RequestParam(name = "nameTopic", required = true) String nameOfTopic) {
 		
 		if(!topicService.existsByNameTopic(nameOfTopic)) {
