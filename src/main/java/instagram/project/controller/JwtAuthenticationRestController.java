@@ -169,7 +169,7 @@ public ResponseEntity registerUser(@Validated @RequestBody SignUpUserFormRequest
     User user = new User(signUpRequest.getFullName(),
   		  signUpRequest.getUsername(),
             passwordEncoder.encode(signUpRequest.getPassword()), 
-            signUpRequest.getEmail(),1,null);
+            signUpRequest.getEmail(),0,null);
 
     Set<Role> roles = new HashSet<>();
     Role userRole = roleRepository.findByName(RoleName.ROLE_USER)

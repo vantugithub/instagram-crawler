@@ -1,6 +1,7 @@
 package instagram.project.response;
 
 public class UserResponse {
+	private long id;
 	private String fullName;
 	private String userName;
 	private String email;
@@ -37,13 +38,22 @@ public class UserResponse {
 	public void setLastDateUpdated(String lastDateUpdated) {
 		this.lastDateUpdated = lastDateUpdated;
 	}
-	public UserResponse(String fullName, String userName, String email, int active, String lastDateUpdated) {
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public UserResponse(long id, String fullName, String userName, String email, int active, String lastDateUpdated) {
+		super();
+		this.id = id;
 		this.fullName = fullName;
 		this.userName = userName;
 		this.email = email;
 		this.active = active;
 		this.lastDateUpdated = lastDateUpdated;
 	}
+	
 	
 	
 }
