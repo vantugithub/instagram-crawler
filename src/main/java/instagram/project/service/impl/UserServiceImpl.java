@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public PagedResponse<UserResponse> findAll(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<User> users = userRepository.findAll(pageable);
+		Page<User> users = userRepository.findAllByOrderByIdDesc(pageable);
 		
 		List<UserResponse> userResponses = new ArrayList<>(users.getContent().size());
 		
