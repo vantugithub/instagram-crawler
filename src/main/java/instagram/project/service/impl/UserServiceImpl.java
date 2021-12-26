@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 	public void save(long id) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.get().isActive()==1) {
-			user.get().setActive(2);
+			user.get().setActive(0);
 		}else {
 			user.get().setActive(1);
 		}

@@ -120,7 +120,7 @@ public class JwtAuthenticationRestController {
       User user = new User(signUpRequest.getFullName(),
     		  signUpRequest.getUserName(),
               passwordEncoder.encode(signUpRequest.getPassword()), 
-              signUpRequest.getEmail(),1,null);
+              signUpRequest.getEmail(),2,null);
 
       Set<String> strRoles = signUpRequest.getRole();
       Set<Role> roles = new HashSet<>();
@@ -169,7 +169,7 @@ public ResponseEntity registerUser(@Validated @RequestBody SignUpUserFormRequest
     User user = new User(signUpRequest.getFullName(),
   		  signUpRequest.getUsername(),
             passwordEncoder.encode(signUpRequest.getPassword()), 
-            signUpRequest.getEmail(),0,null);
+            signUpRequest.getEmail(),2,null);
 
     Set<Role> roles = new HashSet<>();
     Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
