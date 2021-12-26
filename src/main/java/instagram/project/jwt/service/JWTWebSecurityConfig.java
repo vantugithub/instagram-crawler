@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -64,8 +65,8 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/storage/**").permitAll()
-            .antMatchers("/api/admin-management/**").hasRole("ADMIN")
-            .antMatchers("/api/posts/**").hasAnyRole("ADMIN","USER")
+            .antMatchers(HttpMethod.PUT,"/api/admin-management/**").hasRole("ADMIN")
+            .antMatchers(HttpMethod.PUT,"/api/posts/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated();
 
        httpSecurity

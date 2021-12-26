@@ -51,7 +51,7 @@ public class AdminController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@GetMapping("/topics/{id}")
+	@PutMapping("/topics/{id}")
 	public ResponseEntity updateTopic(@RequestParam(name = "id", required = true) int id) {
 		
 		if(!topicService.existsById(id)) {
@@ -99,7 +99,7 @@ public class AdminController {
 	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@GetMapping("/users/{id}")
+	@GetMapping(path = "/users/{id}", produces ={"application/json"})
 	public ResponseEntity updateUser(@PathVariable("id") long id) {
 		if(!userService.existsById(id)) {
 			return new ResponseEntity("Fail -> id user doesn't exist!",
