@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import instagram.project.entity.User;
 import instagram.project.repository.UserRepository;
+import instagram.project.request.ResetPasswordRequest;
 import instagram.project.response.PagedResponse;
 import instagram.project.response.UserResponse;
 import instagram.project.service.UserService;
@@ -23,6 +26,8 @@ import instagram.project.service.UserService;
 @Transactional
 public class UserServiceImpl implements UserService {
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -76,6 +81,20 @@ public class UserServiceImpl implements UserService {
 		
 		return new PagedResponse<>(userResponses, users.getNumber(), users.getSize(), users.getTotalElements(),
 				users.getTotalPages(), users.isLast());
+	}
+
+	@Override
+	public void resetPassword(UserDetails userDetails,String newPassword) {
+		User user = userRepository.findByUsername(userDetails.getUsername()).get();
+		user.setPassword(passwordEncoder.encode(newPassword));
+		userRepository.save(user);
+	}
+
+	@Override
+	public void resetPasswordAdmin(ResetPasswordRequest resetPasswordRequest) {
+		User user = userRepository.findById(resetPasswordRequest.getId()).get();
+		user.setPassword(passwordEncoder.encode(resetPasswordRequest.getPassword()));
+		userRepository.save(user);
 	}
 
 	

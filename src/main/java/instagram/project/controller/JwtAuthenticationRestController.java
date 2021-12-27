@@ -66,11 +66,13 @@ public class JwtAuthenticationRestController {
   @RequestMapping(value = "/api/auth/login", method = RequestMethod.POST)
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException {
-
+	  
+	  
+	  
 	  Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), 
 						authenticationRequest.getPassword()));
-	  
+	
     SecurityContextHolder.getContext().setAuthentication(authentication);
     final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(authenticationRequest
     		.getUsername());

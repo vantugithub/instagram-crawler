@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,8 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import instagram.project.entity.RoleName;
 
 @Configuration
 @EnableWebSecurity
@@ -68,6 +65,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/storage/**").permitAll()
             .antMatchers("/api/admin-management/**").hasRole("ADMIN")
             .antMatchers("/api/posts/**").hasAnyRole("ADMIN","USER")
+            .antMatchers("/api/user-management/**").hasAnyRole("ADMIN","USER")
             .anyRequest().authenticated();
 
        httpSecurity

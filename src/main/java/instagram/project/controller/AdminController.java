@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import instagram.project.entity.Topic;
+import instagram.project.request.ResetPasswordRequest;
 import instagram.project.request.TopicRequest;
 import instagram.project.response.PagedResponse;
 import instagram.project.response.TopicResponse;
@@ -53,7 +53,7 @@ public class AdminController {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping("/topics/{id}")
-	public ResponseEntity updateTopic(@PathVariable(name = "id", required = true) int id) {
+	public ResponseEntity<?> updateTopic(@PathVariable(name = "id", required = true) int id) {
 		
 		if(!topicService.existsById(id)) {
 			return new ResponseEntity("Fail -> name of topic doesn't exist!",
@@ -120,6 +120,20 @@ public class AdminController {
 	@GetMapping("/topics")
 	public List<TopicResponse> getAllTopics(){
 		return topicService.findAll();
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@PutMapping(path = "/users/reset")
+	public ResponseEntity resetPassword(
+			@RequestBody ResetPasswordRequest resetPasswordRequest
+			) {
+		if(!userService.existsById(resetPasswordRequest.getId())) {
+			return new ResponseEntity("Fail -> id user doesn't exist!",
+					HttpStatus.BAD_REQUEST);
+		}
+		userService.resetPasswordAdmin(resetPasswordRequest);
+		
+		return ResponseEntity.ok().body("Reseted successfully!");
 	}
 	
 }
